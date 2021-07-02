@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  padding: 0 20px 30px 0;
+  line-height: 1.4;
+}
+
+header span {
+  color: cyan;
+  size: 0.8em;
+}
+
+header h1 {
+  margin-bottom: 1.5em;
+  margin-top: 1.1em;
+}
+
+.flex-container {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: 100%;
+  height: 500px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: 2s all ease;
+  transition: 2s all ease;
+}
+
+.flex-item {
+  background: cyan;
+  border: 1pt solid black;
+  width: 15px;
+  -webkit-transition: 0.1s all ease;
+  transition: 0.1s all ease;
+}
+
+.row {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 2fr;
+      grid-template-columns: 1fr 1fr 2fr;
+}
+
+#input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#bars {
+  -webkit-transform: scaleY(-1);
+          transform: scaleY(-1);
+}
+
+.buttons {
+  border-radius: 2em;
+  background-color: #242527;
+  color: #3085f5;
+  margin: .5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  font-size: medium;
+}
+
+#n_array {
+  color: cyan;
+  font-size: medium;
+  text-align: left;
+}
+
+#input {
+  margin-left: -5em;
+  font-size: medium;
+}
+
+.buttons:hover {
+  border-color: cyan;
+  -webkit-transition: .4s all ease;
+  transition: .4s all ease;
+}
+/*# sourceMappingURL=main.css.map */
