@@ -2,14 +2,12 @@
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-// swap function util for sorting algorithms takes input of 2 DOM elements with .style.height feature
 function swap(el1, el2) {
   console.log('In swap()');
   var temp = el1.style.height;
   el1.style.height = el2.style.height;
   el2.style.height = temp;
-} // Disables sorting buttons used in conjunction with enable, so that we can disable during sorting and enable buttons after it
-
+} 
 
 function disableSortingBtn() {
   document.getElementById("b").disabled = true;
@@ -17,8 +15,7 @@ function disableSortingBtn() {
   document.getElementById("m").disabled = true;
   document.getElementById("q").disabled = true;
   document.getElementById("s").disabled = true;
-} // Enables sorting buttons used in conjunction with disable
-
+} 
 
 function enableSortingBtn() {
   document.getElementById("b").disabled = false;
@@ -26,28 +23,23 @@ function enableSortingBtn() {
   document.getElementById("m").disabled = false;
   document.getElementById("q").disabled = false;
   document.getElementById("s").disabled = false;
-} // Disables size slider used in conjunction with enable, so that we can disable during sorting and enable buttons after it
-
+} 
 
 function disableSizeSlider() {
   document.querySelector("#arr_sz").disabled = true;
-} // Enables size slider used in conjunction with disable
-
+} 
 
 function enableSizeSlider() {
   document.querySelector("#arr_sz").disabled = false;
-} // Disables newArray buttons used in conjunction with enable, so that we can disable during sorting and enable buttons after it
-
+} 
 
 function disableNewArrayBtn() {
   document.querySelector(".newArray").disabled = true;
-} // Enables newArray buttons used in conjunction with disable
-
+} 
 
 function enableNewArrayBtn() {
   document.querySelector(".newArray").disabled = false;
-} // Used in async function so that we can so animations of sorting, takes input time in ms (1000 = 1s)
-
+} 
 
 function waitforme(milisec) {
   return new Promise(function (resolve) {
@@ -55,24 +47,24 @@ function waitforme(milisec) {
       resolve('');
     }, milisec);
   });
-} // Selecting size slider from DOM
+}
 
 
-var arraySize = document.querySelector('#arr_sz'); // Event listener to update the bars on the UI
+var arraySize = document.querySelector('#arr_sz');
 
 arraySize.addEventListener('input', function () {
   console.log(arraySize.value, _typeof(arraySize.value));
   createNewArray(parseInt(arraySize.value));
-}); // Default input for waitforme function (260ms)
+});
 
-var delay = 260; // Selecting speed slider from DOM
+var delay = 260; 
 
-var delayElement = document.querySelector('#speed_input'); // Event listener to update delay time 
+var delayElement = document.querySelector('#speed_input'); 
 
 delayElement.addEventListener('input', function () {
   console.log(delayElement.value, _typeof(delayElement.value));
   delay = 320 - parseInt(delayElement.value);
-}); // Creating array to store randomly generated numbers
+}); 
 
 var array = []; // // Call to display bars right when you visit the site
 // createNewArray();
@@ -81,7 +73,7 @@ var array = []; // // Call to display bars right when you visit the site
 function createNewArray() {
   var noOfBars = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60;
   // calling helper function to delete old bars from dom
-  deleteChild(); // creating an array of random numbers 
+  deleteChild();
 
   array = [];
 
@@ -89,9 +81,9 @@ function createNewArray() {
     array.push(Math.floor(Math.random() * 250) + 1);
   }
 
-  console.log(array); // select the div #bars element
+  console.log(array); 
 
-  var bars = document.getElementById("bars"); // create multiple element div using loop and adding class 'bar col'
+  var bars = document.getElementById("bars"); 
 
   for (var _i = 0; _i < noOfBars; _i++) {
     var bar = document.createElement("div");
@@ -102,14 +94,13 @@ function createNewArray() {
     bars.appendChild(bar); // this.bars.css('transform', 'scaleX(-1)');
   } // $('#bars').css('transform', 'rotate(90deg)');
 
-} // Helper function to delete all the previous bars so that new can be added
+} 
 
 
 function deleteChild() {
   var bar = document.getElementById("bars");
   bar.innerHTML = '';
-} // Selecting newarray button from DOM and adding eventlistener
-
+} 
 
 var newArray = document.getElementById("n_array");
 newArray.addEventListener("click", function () {
@@ -219,7 +210,7 @@ function insertion() {
       switch (_context3.prev = _context3.next) {
         case 0:
           console.log('In insertion()');
-          ele = document.querySelectorAll(".bar"); // color
+          ele = document.querySelectorAll(".bar"); 
 
           ele[0].style.background = 'green';
           i = 1;
@@ -232,7 +223,7 @@ function insertion() {
 
           console.log('In ith loop');
           j = i - 1;
-          key = ele[i].style.height; // color
+          key = ele[i].style.height; 
 
           ele[i].style.background = 'blue';
           _context3.next = 11;
@@ -244,7 +235,7 @@ function insertion() {
             break;
           }
 
-          console.log('In while loop'); // color
+          console.log('In while loop'); 
 
           ele[j].style.background = 'blue';
           ele[j + 1].style.height = ele[j].style.height;
@@ -253,7 +244,7 @@ function insertion() {
           return regeneratorRuntime.awrap(waitforme(delay));
 
         case 18:
-          // color
+         
           for (k = i; k >= 0; k--) {
             ele[k].style.background = 'green';
           }
@@ -262,7 +253,7 @@ function insertion() {
           break;
 
         case 21:
-          ele[j + 1].style.height = key; // color
+          ele[j + 1].style.height = key; 
 
           ele[i].style.background = 'green';
 
@@ -319,8 +310,7 @@ function selection() {
           }
 
           console.log('In ith loop');
-          min_index = i; // Change color of the position to swap with the next min
-
+          min_index = i; 
           ele[i].style.background = 'blue';
           j = i + 1;
 
@@ -330,7 +320,7 @@ function selection() {
             break;
           }
 
-          console.log('In jth loop'); // Change color for the current comparision (in consideration for min_index)
+          console.log('In jth loop'); 
 
           ele[j].style.background = 'red';
           _context5.next = 13;
@@ -341,13 +331,11 @@ function selection() {
             console.log('In if condition height comparision');
 
             if (min_index !== i) {
-              // new min_index is found so change prev min_index color back to normal
               ele[min_index].style.background = 'cyan';
             }
 
             min_index = j;
           } else {
-            // if the currnent comparision is more than min_index change is back to normal
             ele[j].style.background = 'cyan';
           }
 
@@ -361,9 +349,9 @@ function selection() {
           return regeneratorRuntime.awrap(waitforme(delay));
 
         case 19:
-          swap(ele[min_index], ele[i]); // change the min element index back to normal as it is swapped 
+          swap(ele[min_index], ele[i]); 
 
-          ele[min_index].style.background = 'cyan'; // change the sorted elements color to green
+          ele[min_index].style.background = 'cyan'; 
 
           ele[i].style.background = 'green';
 
@@ -429,7 +417,7 @@ function merge(ele, low, mid, high) {
 
         case 11:
           console.log('In merge left loop');
-          console.log(ele[low + _i5].style.height + ' at ' + (low + _i5)); // color
+          console.log(ele[low + _i5].style.height + ' at ' + (low + _i5)); 
 
           ele[low + _i5].style.background = 'orange';
           left[_i5] = ele[low + _i5].style.height;
@@ -453,7 +441,7 @@ function merge(ele, low, mid, high) {
 
         case 22:
           console.log('In merge right loop');
-          console.log(ele[mid + 1 + _i6].style.height + ' at ' + (mid + 1 + _i6)); // color
+          console.log(ele[mid + 1 + _i6].style.height + ' at ' + (mid + 1 + _i6)); 
 
           ele[mid + 1 + _i6].style.background = 'yellow';
           right[_i6] = ele[mid + 1 + _i6].style.height;
@@ -481,10 +469,10 @@ function merge(ele, low, mid, high) {
 
         case 35:
           console.log('In merge while loop');
-          console.log(parseInt(left[i]), parseInt(right[j])); // To add color for which two r being compared for merging
+          console.log(parseInt(left[i]), parseInt(right[j]));
 
           if (parseInt(left[i]) <= parseInt(right[j])) {
-            console.log('In merge while loop if'); // color
+            console.log('In merge while loop if');
 
             if (n1 + n2 === ele.length) {
               ele[k].style.background = 'green';
@@ -496,7 +484,7 @@ function merge(ele, low, mid, high) {
             i++;
             k++;
           } else {
-            console.log('In merge while loop else'); // color
+            console.log('In merge while loop else');
 
             if (n1 + n2 === ele.length) {
               ele[k].style.background = 'green';
@@ -522,7 +510,7 @@ function merge(ele, low, mid, high) {
           return regeneratorRuntime.awrap(waitforme(delay));
 
         case 43:
-          console.log("In while if n1 is left"); // color
+          console.log("In while if n1 is left");
 
           if (n1 + n2 === ele.length) {
             ele[k].style.background = 'green';
@@ -546,7 +534,7 @@ function merge(ele, low, mid, high) {
           return regeneratorRuntime.awrap(waitforme(delay));
 
         case 53:
-          console.log("In while if n2 is left"); // color
+          console.log("In while if n2 is left");
 
           if (n1 + n2 === ele.length) {
             ele[k].style.background = 'green';
@@ -642,7 +630,7 @@ function partitionLomuto(ele, l, r) {
       switch (_context10.prev = _context10.next) {
         case 0:
           console.log('In partitionLomuto()');
-          i = l - 1; // color pivot element
+          i = l - 1; 
 
           ele[r].style.background = 'red';
           j = l;
@@ -653,10 +641,9 @@ function partitionLomuto(ele, l, r) {
             break;
           }
 
-          console.log('In partitionLomuto for j'); // color current element
+          console.log('In partitionLomuto for j'); 
 
-          ele[j].style.background = 'yellow'; // pauseChamp
-
+          ele[j].style.background = 'yellow'; 
           _context10.next = 9;
           return regeneratorRuntime.awrap(waitforme(delay));
 
@@ -668,10 +655,10 @@ function partitionLomuto(ele, l, r) {
 
           console.log('In partitionLomuto for j if');
           i++;
-          swap(ele[i], ele[j]); // color 
+          swap(ele[i], ele[j]);  
 
           ele[i].style.background = 'orange';
-          if (i != j) ele[j].style.background = 'orange'; // pauseChamp
+          if (i != j) ele[j].style.background = 'orange'; 
 
           _context10.next = 17;
           return regeneratorRuntime.awrap(waitforme(delay));
@@ -681,7 +668,7 @@ function partitionLomuto(ele, l, r) {
           break;
 
         case 19:
-          // color if not less than pivot
+          
           ele[j].style.background = 'pink';
 
         case 20:
@@ -690,24 +677,23 @@ function partitionLomuto(ele, l, r) {
           break;
 
         case 23:
-          i++; // pauseChamp
+          i++; 
 
           _context10.next = 26;
           return regeneratorRuntime.awrap(waitforme(delay));
 
         case 26:
-          swap(ele[i], ele[r]); // pivot height one
+          swap(ele[i], ele[r]); 
 
-          console.log("i = ".concat(i), _typeof(i)); // color
+          console.log("i = ".concat(i), _typeof(i)); 
 
           ele[r].style.background = 'pink';
-          ele[i].style.background = 'green'; // pauseChamp
+          ele[i].style.background = 'green'; 
 
           _context10.next = 32;
           return regeneratorRuntime.awrap(waitforme(delay));
 
         case 32:
-          // color
           for (k = 0; k < ele.length; k++) {
             if (ele[k].style.background != 'green') ele[k].style.background = 'cyan';
           }

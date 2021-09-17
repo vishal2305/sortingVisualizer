@@ -1,4 +1,4 @@
-// swap function util for sorting algorithms takes input of 2 DOM elements with .style.height feature
+
 function swap(el1, el2) {
     console.log('In swap()');
     
@@ -7,8 +7,6 @@ function swap(el1, el2) {
     el2.style.height = temp;
     
 }
-
-// Disables sorting buttons used in conjunction with enable, so that we can disable during sorting and enable buttons after it
 function disableSortingBtn(){
     document.getElementById("b").disabled = true;
     document.getElementById("i").disabled = true;
@@ -16,8 +14,6 @@ function disableSortingBtn(){
     document.getElementById("q").disabled = true;
     document.getElementById("s").disabled = true;
 }
-
-// Enables sorting buttons used in conjunction with disable
 function enableSortingBtn(){
     document.getElementById("b").disabled = false;
     document.getElementById("i").disabled = false;
@@ -26,76 +22,47 @@ function enableSortingBtn(){
     document.getElementById("s").disabled = false;
 }
 
-// Disables size slider used in conjunction with enable, so that we can disable during sorting and enable buttons after it
 function disableSizeSlider(){
     document.querySelector("#arr_sz").disabled = true;
 }
 
-// Enables size slider used in conjunction with disable
 function enableSizeSlider(){
     document.querySelector("#arr_sz").disabled = false;
 }
 
-// Disables newArray buttons used in conjunction with enable, so that we can disable during sorting and enable buttons after it
 function disableNewArrayBtn(){
     document.querySelector(".newArray").disabled = true;
 }
 
-// Enables newArray buttons used in conjunction with disable
 function enableNewArrayBtn(){
     document.querySelector(".newArray").disabled = false;
 }
 
-// Used in async function so that we can so animations of sorting, takes input time in ms (1000 = 1s)
 function waitforme(milisec) { 
     return new Promise(resolve => { 
         setTimeout(() => { resolve('') }, milisec); 
     }) 
 }
-
-// Selecting size slider from DOM
 let arraySize = document.querySelector('#arr_sz');
-
-// Event listener to update the bars on the UI
 arraySize.addEventListener('input', function(){
     console.log(arraySize.value, typeof(arraySize.value));
     createNewArray(parseInt(arraySize.value));
 });
-
-// Default input for waitforme function (260ms)
 let delay = 260;
-
-// Selecting speed slider from DOM
 let delayElement = document.querySelector('#speed_input');
-
-// Event listener to update delay time 
 delayElement.addEventListener('input', function(){
     console.log(delayElement.value, typeof(delayElement.value));
     delay = 320 - parseInt(delayElement.value);
 });
-
-// Creating array to store randomly generated numbers
 let array = [];
-
-// // Call to display bars right when you visit the site
-// createNewArray();
-
-// To create new array input size of array
 function createNewArray(noOfBars = 60) {
-    // calling helper function to delete old bars from dom
     deleteChild();
-
-    // creating an array of random numbers 
     array = [];
     for (let i = 0; i < noOfBars; i++) {
         array.push(Math.floor(Math.random() * 250) + 1);
     }
     console.log(array);
-
-    // select the div #bars element
     const bars = document.getElementById("bars");
-
-    // create multiple element div using loop and adding class 'bar col'
     for (let i = 0; i < noOfBars; i++) {
         const bar = document.createElement("div");
         bar.style.height = `${array[i]*2}px`;
@@ -109,13 +76,13 @@ function createNewArray(noOfBars = 60) {
     // $('#bars').css('transform', 'rotate(90deg)');
 }
 
-// Helper function to delete all the previous bars so that new can be added
+//function to delete all the previous bars so that new can be added
 function deleteChild() {
     const bar = document.getElementById("bars");
     bar.innerHTML = '';
 }
 
-// Selecting newarray button from DOM and adding eventlistener
+// Selecting newarray button and adding eventlistener
 const newArray = document.getElementById("n_array");
 newArray.addEventListener("click", function(){
     console.log("From newArray " + arraySize.value);
@@ -177,33 +144,27 @@ bubSortbtn.addEventListener('click', async function(){
 async function insertion(){
     console.log('In insertion()');
     const ele = document.querySelectorAll(".bar");
-    // color
     ele[0].style.background = 'green';
     for(let i = 1; i < ele.length; i++){
         console.log('In ith loop');
         let j = i - 1;
         let key = ele[i].style.height;
-        // color
         ele[i].style.background = 'blue';
 
         await waitforme(delay);
 
         while(j >= 0 && (parseInt(ele[j].style.height) > parseInt(key))){
             console.log('In while loop');
-            // color
             ele[j].style.background = 'blue';
             ele[j + 1].style.height = ele[j].style.height;
             j--;
 
             await waitforme(delay);
-
-            // color
             for(let k = i; k >= 0; k--){
                 ele[k].style.background = 'green';
             }
         }
         ele[j + 1].style.height = key;
-        // color
         ele[i].style.background = 'green';
     }
     for(let i=0;i<ele.length;i++){
@@ -239,28 +200,23 @@ async function selection(){
         ele[i].style.background = 'blue';
         for(let j = i+1; j < ele.length; j++){
             console.log('In jth loop');
-            // Change color for the current comparision (in consideration for min_index)
             ele[j].style.background = 'red';
 
             await waitforme(delay);
             if(parseInt(ele[j].style.height) < parseInt(ele[min_index].style.height)){
                 console.log('In if condition height comparision');
                 if(min_index !== i){
-                    // new min_index is found so change prev min_index color back to normal
                     ele[min_index].style.background = 'cyan';
                 }
                 min_index = j;
             } 
             else{
-                // if the currnent comparision is more than min_index change is back to normal
                 ele[j].style.background = 'cyan';
             }   
         }
         await waitforme(delay);
-        swap(ele[min_index], ele[i]);
-        // change the min element index back to normal as it is swapped 
+        swap(ele[min_index], ele[i]); 
         ele[min_index].style.background = 'cyan';
-        // change the sorted elements color to green
         ele[i].style.background = 'green';
     }
     for(let i=0;i<ele.length;i++){
@@ -302,7 +258,6 @@ async function merge(ele, low, mid, high){
         await waitforme(delay);
         console.log('In merge left loop');
         console.log(ele[low + i].style.height + ' at ' + (low+i));
-        // color
         ele[low + i].style.background = 'orange';
         left[i] = ele[low + i].style.height;
     }
@@ -310,7 +265,6 @@ async function merge(ele, low, mid, high){
         await waitforme(delay);
         console.log('In merge right loop');
         console.log(ele[mid + 1 + i].style.height + ' at ' + (mid+1+i));
-        // color
         ele[mid + 1 + i].style.background = 'yellow';
         right[i] = ele[mid + 1 + i].style.height;
     }
@@ -320,8 +274,6 @@ async function merge(ele, low, mid, high){
         await waitforme(delay);
         console.log('In merge while loop');
         console.log(parseInt(left[i]), parseInt(right[j]));
-        
-        // To add color for which two r being compared for merging
         
         if(parseInt(left[i]) <= parseInt(right[j])){
             console.log('In merge while loop if');
@@ -339,7 +291,6 @@ async function merge(ele, low, mid, high){
         }
         else{
             console.log('In merge while loop else');
-            // color
             if((n1 + n2) === ele.length){
                 ele[k].style.background = 'green';
             }
@@ -354,7 +305,6 @@ async function merge(ele, low, mid, high){
     while(i < n1){
         await waitforme(delay);
         console.log("In while if n1 is left");
-        // color
         if((n1 + n2) === ele.length){
             ele[k].style.background = 'green';
         }
@@ -368,7 +318,6 @@ async function merge(ele, low, mid, high){
     while(j < n2){
         await waitforme(delay);
         console.log("In while if n2 is left");
-        // color
         if((n1 + n2) === ele.length){
             ele[k].style.background = 'green';
         }
@@ -422,43 +371,31 @@ mergeSortbtn.addEventListener('click', async function(){
 async function partitionLomuto(ele, l, r){
     console.log('In partitionLomuto()');
     let i = l - 1;
-    // color pivot element
     ele[r].style.background = 'red';
     for(let j = l; j <= r - 1; j++){
         console.log('In partitionLomuto for j');
-        // color current element
         ele[j].style.background = 'yellow';
-        // pauseChamp
         await waitforme(delay);
 
         if(parseInt(ele[j].style.height) < parseInt(ele[r].style.height)){
             console.log('In partitionLomuto for j if');
             i++;
             swap(ele[i], ele[j]);
-            // color 
             ele[i].style.background = 'orange';
             if(i != j) ele[j].style.background = 'orange';
-            // pauseChamp
             await waitforme(delay);
         }
         else{
-            // color if not less than pivot
             ele[j].style.background = 'pink';
         }
     }
     i++; 
-    // pauseChamp
     await waitforme(delay);
-    swap(ele[i], ele[r]); // pivot height one
+    swap(ele[i], ele[r]);
     console.log(`i = ${i}`, typeof(i));
-    // color
     ele[r].style.background = 'pink';
     ele[i].style.background = 'green';
-
-    // pauseChamp
     await waitforme(delay);
-    
-    // color
     for(let k = 0; k < ele.length; k++){
         if(ele[k].style.background != 'green')
             ele[k].style.background = 'cyan';
